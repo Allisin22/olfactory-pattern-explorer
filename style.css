@@ -1,0 +1,127 @@
+:root {
+  --page-background: #171623;
+  --panel-background: #111019;
+  --text: #f4f2ef;
+  --secondary-text: #c5c4ce;
+  --teal: #19b5ad;
+  --blue: #397dcc;
+}
+
+body {
+  margin: 0;
+  padding: 48px 20px;
+  background: var(--page-background);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+}
+
+h1::after {
+  content: "";
+  display: block;
+  width: 160px;
+  height: 6px;
+  margin-top: 18px;
+  background: linear-gradient(to right,
+      var(--teal),
+      var(--blue));
+}
+
+p {
+  color: var(--secondary-text);
+}
+
+#explorer {
+  margin-top: 32px;
+  padding: 28px;
+  background: var(--panel-background);
+  border: 1px solid #343244;
+  border-radius: 14px;
+}
+
+#channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.channel {
+  padding: 18px 12px;
+  border: 1px solid var(--secondary-text);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.channel[data-value="1"] {
+  background: var(--teal);
+  color: #111019;
+  border-color: var(--teal);
+}
+
+.channel {
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.channel[data-value="hidden"] {
+  border-style: dashed;
+  color: var(--secondary-text);
+}
+
+.channel:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+
+.model-note {
+  font-size: 0.9rem;
+  color: var(--secondary-text);
+  max-width: 65ch;
+}
+
+#pattern-select,
+#restore-channels {
+  font: inherit;
+  color: var(--text);
+  background: var(--panel-background);
+  border: 1px solid var(--teal);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+#pattern-select {
+  margin-left: 8px;
+}
+
+#restore-channels {
+  cursor: pointer;
+}
+
+#restore-channels:hover {
+  background: var(--teal);
+  color: var(--page-background);
+}
+
+#pattern-select:focus-visible,
+#restore-channels:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+
+#match-status {
+  font-weight: bold;
+}

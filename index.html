@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How Much Information Is Enough?</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <main>
+    <h1>How Much Information Is Enough?</h1>
+    <p>
+      Explore how removing parts of a signal changes
+      which patterns we can distinguish.
+    </p>
+
+    <section id="explorer" aria-label="Pattern explorer">
+      <p><label for="pattern-select">Choose a starting pattern:</label>
+
+        <select id="pattern-select">
+          <option value="A">Pattern A</option>
+          <option value="B">Pattern B</option>
+          <option value="C">Pattern C</option>
+        </select>
+
+      <p id="pattern-status">Selected pattern: A</p>
+      <div id="channels" aria-label="Input channels"></div>
+      </p>
+
+      <p id="match-status" aria-live="polite"></p>
+      <button id="restore-channels" type="button">Restore all channels</button>
+
+      <p class="model-note">
+        These are three invented patterns across eight simplified signal channels,
+        not measurements of real odors. A 1 means activity meets our model’s
+        threshold; a 0 means it does not. A ? means that channel’s information
+        is unavailable—not that it is inactive.
+      </p>
+
+      <p class="model-note">
+        The model compares visible values with stored patterns. It does not
+        simulate individual action potentials, map patterns to particular brain
+        regions, or learn like a neural network.
+      </p>
+
+    </section>
+  </main>
+</body>
+
+</html>
