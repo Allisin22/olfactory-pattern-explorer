@@ -17,6 +17,239 @@
       which patterns we can distinguish.
     </p>
 
+    <section id="olfactory-pathway" aria-labelledby="scene-title">
+      <h2 id="scene-title">Where smell begins</h2>
+
+      <p id="scene-explanation">
+        Olfactory sensory neurons are cells in the lining high inside
+        the nose. Receptors on these cells interact with odor molecules.
+        We’ll follow how that interaction becomes a signal traveling
+        toward the olfactory bulb.
+      </p>
+
+      <svg
+        id="sensory-diagram"
+        viewBox="0 0 800 300"
+        role="img"
+        aria-labelledby="sensory-title sensory-description">
+        <title id="sensory-title">Receiving an odor and carrying a signal</title>
+
+        <desc id="sensory-description">
+          A schematic sensory neuron. Odor molecules sit near receptor
+          markers on cilia at the left. A dendrite connects this end to
+          the cell body. An axon extends right toward the olfactory bulb.
+          Structures and molecules are not drawn to scale.
+        </desc>
+
+        <g id="sensory-receiving-end">
+          <line x1="110" y1="150" x2="210" y2="150" />
+          <line x1="110" y1="150" x2="50" y2="90" />
+          <line x1="110" y1="150" x2="35" y2="150" />
+          <line x1="110" y1="150" x2="50" y2="210" />
+          <circle cx="110" cy="150" r="8" />
+        </g>
+
+        <g id="receptor-markers">
+          <circle cx="65" cy="105" r="6" />
+          <circle cx="55" cy="150" r="6" />
+          <circle cx="65" cy="195" r="6" />
+        </g>
+
+        <g id="odor-molecules">
+          <circle cx="42" cy="72" r="5" />
+          <circle cx="24" cy="125" r="5" />
+          <circle cx="30" cy="225" r="5" />
+        </g>
+
+        <line
+          id="sensory-axon"
+          x1="270"
+          y1="150"
+          x2="550"
+          y2="150" />
+
+        <ellipse
+          id="sensory-cell-body"
+          cx="240"
+          cy="150"
+          rx="35"
+          ry="45" />
+
+        <text x="15" y="35">Odor molecules</text>
+        <text x="15" y="260">Cilia + receptors</text>
+        <text x="125" y="130">Dendrite</text>
+        <text x="195" y="220">Cell body</text>
+        <text x="385" y="125">Axon</text>
+        <text x="350" y="185">Toward the bulb →</text>
+      </svg>
+
+      <button id="explore-receptors" type="button" aria-pressed="false">
+        Explore odor receptors
+      </button>
+
+      <button id="highlight-axon" type="button" aria-pressed="false">
+        Highlight the axon
+      </button>
+
+      <h3>Where the signal reaches another neuron</h3>
+
+      <svg
+        id="bulb-diagram"
+        viewBox="0 0 850 300"
+        role="img"
+        aria-labelledby="bulb-title bulb-description">
+        <title id="bulb-title">A connection inside a glomerulus</title>
+
+        <desc id="bulb-description">
+          A sensory axon ends inside a glomerulus, near the dendritic
+          branches of a bulb neuron. The dendrite connects to that
+          neuron's cell body outside the glomerulus.
+          This schematic shows only selected parts of the circuit.
+        </desc>
+
+        <circle
+          id="glomerulus-boundary"
+          cx="280"
+          cy="135"
+          r="85" />
+
+        <g id="incoming-sensory-axon">
+          <line
+            id="sensory-input-line"
+            x1="30"
+            y1="135"
+            x2="265"
+            y2="135"
+            pathLength="1" />
+          <circle
+            id="sensory-terminal"
+            cx="265"
+            cy="135"
+            r="6" />
+        </g>
+
+        <g id="receiving-bulb-neuron">
+          <g id="receiving-branches">
+            <line x1="285" y1="100" x2="320" y2="135" pathLength="1" />
+            <line x1="285" y1="135" x2="320" y2="135" pathLength="1" />
+            <line x1="285" y1="170" x2="320" y2="135" pathLength="1" />
+          </g>
+
+          <line
+            id="bulb-dendrite"
+            x1="320"
+            y1="135"
+            x2="470"
+            y2="135"
+            pathLength="1" />
+
+          <ellipse cx="495" cy="135" rx="30" ry="40" />
+
+          <line
+            id="bulb-output-axon"
+            x1="525"
+            y1="135"
+            x2="760"
+            y2="135"
+            pathLength="1" />
+
+        </g>
+
+        <text x="225" y="35">Glomerulus</text>
+        <text x="25" y="110">Sensory axon</text>
+        <text x="365" y="110">Dendrite</text>
+        <text x="435" y="205">Bulb neuron</text>
+        <text x="600" y="110">Output axon</text>
+        <text x="590" y="175">Toward receiving regions →</text>
+      </svg>
+
+      <button id="trace-sensory-input" type="button">
+        Trace the sensory axon
+      </button>
+
+      <p id="trace-status" aria-live="polite">
+        Select the button to trace the pathway between two neurons.
+      </p>
+
+      <p class="model-note">
+        The dashed circle marks a region containing many connections, not a cell membrane.
+        The enlarged gap indicates a synaptic connection between different neurons. Local circuits and most
+        branches are omitted.
+      </p>
+
+      <h3>Following a projection</h3>
+
+      <svg
+        id="projection-diagram"
+        viewBox="0 0 850 300"
+        role="img"
+        aria-labelledby="projection-title projection-description">
+        <title id="projection-title">
+          Direct projection from the olfactory bulb to piriform cortex
+        </title>
+
+        <desc id="projection-description">
+          A schematic bulb output neuron sends its axon along a curved
+          path into piriform cortex, where the axon forms terminal branches.
+        </desc>
+
+        <ellipse
+          id="projection-bulb"
+          cx="120"
+          cy="150"
+          rx="75"
+          ry="95" />
+
+        <circle
+          id="projection-cell-body"
+          cx="115"
+          cy="150"
+          r="16" />
+
+        <path
+          id="direct-projection"
+          d="M 131 150 C 300 65, 455 235, 650 150"
+          pathLength="1" />
+
+        <rect
+          id="projection-piriform"
+          x="625"
+          y="65"
+          width="190"
+          height="170"
+          rx="28" />
+
+        <g id="projection-terminals">
+          <line x1="650" y1="150" x2="700" y2="110" />
+          <line x1="650" y1="150" x2="705" y2="150" />
+          <line x1="650" y1="150" x2="700" y2="190" />
+
+          <circle cx="700" cy="110" r="5" />
+          <circle cx="705" cy="150" r="5" />
+          <circle cx="700" cy="190" r="5" />
+        </g>
+
+        <text x="65" y="35">Olfactory bulb</text>
+        <text x="315" y="55">Axon pathway</text>
+        <text x="655" y="45">Piriform cortex</text>
+      </svg>
+
+      <button id="follow-projection" type="button">
+        Follow the projection
+      </button>
+
+      <p id="projection-status" aria-live="polite">
+        Follow a bulb output neuron's axon into a receiving region.
+      </p>
+
+      <p class="model-note">
+        This selected pathway illustrates a direct anatomical projection.
+        The real pathway contains many neurons and branching axons; their
+        activity is not represented by this single line.
+      </p>
+
+    </section>
+
     <section id="explorer" aria-label="Pattern explorer">
       <p><label for="pattern-select">Choose a starting pattern:</label>
 

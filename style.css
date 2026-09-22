@@ -90,11 +90,11 @@ p {
 .model-note {
   font-size: 0.9rem;
   color: var(--secondary-text);
-  max-width: 65ch;
 }
 
 #pattern-select,
-#restore-channels {
+#restore-channels,
+#highlight-axon {
   font: inherit;
   color: var(--text);
   background: var(--panel-background);
@@ -107,21 +107,231 @@ p {
   margin-left: 8px;
 }
 
-#restore-channels {
+#restore-channels,
+#highlight-axon {
   cursor: pointer;
 }
 
-#restore-channels:hover {
+#restore-channels:hover,
+#highlight-axon:hover {
   background: var(--teal);
   color: var(--page-background);
 }
 
 #pattern-select:focus-visible,
-#restore-channels:focus-visible {
+#restore-channels:focus-visible,
+#highlight-axon:focus-visible {
   outline: 3px solid var(--blue);
   outline-offset: 4px;
 }
 
 #match-status {
   font-weight: bold;
+}
+
+#olfactory-pathway {
+  margin-top: 32px;
+  padding: 28px;
+  background: var(--panel-background);
+  border: 1px solid #343244;
+  border-radius: 14px;
+}
+
+#sensory-diagram {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  margin: 24px auto;
+}
+
+#sensory-axon {
+  stroke: var(--secondary-text);
+  stroke-width: 6;
+  stroke-linecap: round;
+  transform: stroke 1200ms linear;
+}
+
+#sensory-cell-body {
+  fill: var(--panel-background);
+  stroke: var(--teal);
+  stroke-width: 3;
+}
+
+#sensory-diagram text {
+  fill: var(--text);
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+}
+
+#sensory-axon.is-highlighted {
+  stroke: var(--teal);
+}
+
+#sensory-receiving-end {
+  stroke: var(--secondary-text);
+  stroke-width: 4;
+  stroke-linecap: round;
+  fill: var(--panel-background);
+}
+
+#receptor-markers {
+  fill: var(--blue);
+  stroke: var(--text);
+  stroke-width: 1;
+}
+
+#odor-molecules {
+  fill: #d9a06f;
+}
+
+#explore-receptors {
+  font: inherit;
+  color: var(--text);
+  background: var(--panel-background);
+  border: 1px solid var(--teal);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+#explore-receptors:hover {
+  background: var(--teal);
+  color: var(--page-background);
+}
+
+#explore-receptors:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+
+#receptor-markers.is-highlighted {
+  fill: var(--teal);
+  stroke-width: 3;
+}
+
+#explore-receptors[aria-pressed="true"],
+#highlight-axon[aria-pressed="true"] {
+  background: var(--teal);
+  color: var(--page-background);
+}
+
+#bulb-diagram {
+  display: block;
+  width: 100%;
+  max-width: 850px;
+  margin: 24px auto;
+}
+
+#glomerulus-boundary {
+  fill: none;
+  stroke: var(--secondary-text);
+  stroke-width: 2;
+  stroke-dasharray: 6 6;
+}
+
+#incoming-sensory-axon {
+  stroke: var(--teal);
+  fill: var(--teal);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+#receiving-bulb-neuron {
+  stroke: var(--blue);
+  fill: var(--panel-background);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+#bulb-diagram text {
+  fill: var(--text);
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+}
+
+#sensory-input-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+#sensory-terminal {
+  opacity: 0;
+}
+
+#trace-sensory-input {
+  font: inherit;
+  color: var(--text);
+  background: var(--panel-background);
+  border: 1px solid var(--teal);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+#trace-sensory-input:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+
+#receiving-branches line,
+#bulb-dendrite,
+#bulb-output-axon {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+#projection-diagram {
+  display: block;
+  width: 100%;
+  max-width: 850px;
+  margin: 24px auto;
+}
+
+#projection-bulb,
+#projection-piriform {
+  fill: var(--panel-background);
+  stroke: var(--secondary-text);
+  stroke-width: 3;
+}
+
+#projection-cell-body {
+  fill: var(--blue);
+}
+
+#direct-projection {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+#projection-terminals {
+  fill: var(--blue);
+  stroke: var(--blue);
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: 0;
+}
+
+#projection-diagram text {
+  fill: var(--text);
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+}
+
+#follow-projection {
+  font: inherit;
+  color: var(--text);
+  background: var(--panel-background);
+  border: 1px solid var(--teal);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+#follow-projection:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
 }
