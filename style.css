@@ -5,6 +5,7 @@
   --secondary-text: #c5c4ce;
   --teal: #19b5ad;
   --blue: #397dcc;
+  --copper: #d9a06f;
 }
 
 body {
@@ -52,7 +53,7 @@ p {
 
 #channels {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
   gap: 12px;
   margin-top: 24px;
 }
@@ -140,7 +141,7 @@ p {
 #sensory-diagram {
   display: block;
   width: 100%;
-  max-width: 600px;
+  max-width: 850px;
   margin: 24px auto;
 }
 
@@ -181,7 +182,7 @@ p {
 }
 
 #odor-molecules {
-  fill: #d9a06f;
+  fill: var(--copper);
 }
 
 #explore-receptors {
@@ -334,4 +335,188 @@ p {
 #follow-projection:focus-visible {
   outline: 3px solid var(--blue);
   outline-offset: 4px;
+}
+
+#brain-projection-map {
+  display: block;
+  width: 100%;
+  max-width: 1230px;
+  margin: 24px auto;
+}
+
+#map-bulb,
+.map-node rect {
+  fill: var(--panel-background);
+  stroke: var(--secondary-text);
+  stroke-width: 3;
+}
+
+#map-bulb {
+  stroke: var(--teal);
+}
+
+.direct-route {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 4;
+  stroke-linecap: round;
+  marker-end: url("#direct-arrow");
+}
+
+#direct-arrow path {
+  fill: var(--blue);
+}
+
+#brain-projection-map text {
+  fill: var(--text);
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+}
+
+.onward-route {
+  fill: none;
+  stroke: var(--copper);
+  stroke-width: 4;
+  stroke-linecap: round;
+  marker-end: url("#onward-arrow");
+}
+
+#onward-arrow path {
+  fill: var(--copper);
+}
+
+.onward-node rect {
+  stroke: var(--copper);
+}
+
+#region-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.region-button {
+  font: inherit;
+  color: var(--text);
+  background: var(--panel-background);
+  border: 1px solid var(--teal);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.region-button:hover,
+.region-button[aria-pressed="true"] {
+  background: var(--teal);
+  color: var(--page-background);
+}
+
+.region-button:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+
+#region-detail {
+  margin-top: 20px;
+  padding-left: 16px;
+  border-left: 3px solid var(--teal);
+}
+
+#region-detail p {
+  margin: 6px 0;
+}
+
+#region-detail-title {
+  color: var(--text);
+  font-weight: bold;
+}
+
+.map-node rect,
+.direct-route,
+.onward-route {
+  transition: stroke-width 200ms ease;
+}
+
+.map-node.is-selected rect {
+  stroke-width: 7;
+}
+
+.direct-route.is-selected,
+.onward-route.is-selected {
+  stroke-width: 8;
+}
+
+.pathway-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0 32px;
+}
+
+.pathway-navigation a {
+  padding: 7px 11px;
+  color: var(--secondary-text);
+  text-decoration: none;
+  border: 1px solid #343244;
+  border-radius: 8px;
+}
+
+.pathway-navigation a:hover {
+  color: var(--teal);
+  border-color: var(--teal);
+}
+
+.pathway-navigation a:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 4px;
+}
+
+.relay-visual {
+  display: grid;
+}
+
+.relay-visual>svg,
+.relay-trace-button {
+  grid-area: 1 / 1;
+}
+
+.relay-visual>svg {
+  width: 100%;
+  height: auto;
+}
+
+.relay-trace-button {
+  align-self: start;
+  justify-self: end;
+  z-index: 1;
+  margin: 1.25rem 3rem 0 0;
+}
+
+#trace-status {
+  margin-top: 1.5rem;
+  max-width: none;
+  min-height: 3.5em;
+  font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  .relay-visual {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .relay-trace-button {
+    align-self: flex-start;
+    margin: 1rem 0 0;
+  }
+}
+
+#follow-projection.is-animating {
+  background-color: #20b8b3;
+  border-color: #20b8b3;
+  color: #111019;
+  opacity: 1;
+  cursor: wait;
 }

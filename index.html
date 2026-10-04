@@ -4,17 +4,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>How Much Information Is Enough?</title>
+  <title>How Does Smell Convey Information?</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 
 <body>
   <main>
-    <h1>How Much Information Is Enough?</h1>
+    <h1>How Does Smell Convey Information</h1>
     <p>
-      Explore how removing parts of a signal changes
-      which patterns we can distinguish.
+      Follow a simplified olfactory pathway from an odor molecule’s
+      interaction with sensory receptors to bulb output and selected
+      receiving brain networks.
     </p>
 
     <section id="olfactory-pathway" aria-labelledby="scene-title">
@@ -27,9 +28,17 @@
         toward the olfactory bulb.
       </p>
 
+      <nav class="pathway-navigation" aria-label="Olfactory pathway steps">
+        <a href="#scene-title">1. Receive</a>
+        <a href="#bulb-step-title">2. Relay</a>
+        <a href="#projection-step-title">3. Project</a>
+        <a href="#map-step-title">4. Distribute</a>
+        <!-- <a href="#explorer-title">5. Test the pattern</a> -->
+      </nav>
+
       <svg
         id="sensory-diagram"
-        viewBox="0 0 800 300"
+        viewBox="0 0 850 300"
         role="img"
         aria-labelledby="sensory-title sensory-description">
         <title id="sensory-title">Receiving an odor and carrying a signal</title>
@@ -65,7 +74,7 @@
           id="sensory-axon"
           x1="270"
           y1="150"
-          x2="550"
+          x2="800"
           y2="150" />
 
         <ellipse
@@ -79,8 +88,8 @@
         <text x="15" y="260">Cilia + receptors</text>
         <text x="125" y="130">Dendrite</text>
         <text x="195" y="220">Cell body</text>
-        <text x="385" y="125">Axon</text>
-        <text x="350" y="185">Toward the bulb →</text>
+        <text x="510" y="125">Axon</text>
+        <text x="475" y="185">Toward the bulb →</text>
       </svg>
 
       <button id="explore-receptors" type="button" aria-pressed="false">
@@ -91,93 +100,126 @@
         Highlight the axon
       </button>
 
-      <h3>Where the signal reaches another neuron</h3>
+      <h3 id="bulb-step-title">
+        Where the signal reaches another neuron
+      </h3>
 
-      <svg
-        id="bulb-diagram"
-        viewBox="0 0 850 300"
-        role="img"
-        aria-labelledby="bulb-title bulb-description">
-        <title id="bulb-title">A connection inside a glomerulus</title>
+      <div class="relay-visual">
+        <svg
+          id="bulb-diagram"
+          viewBox="0 0 850 230"
+          role="img"
+          aria-labelledby="bulb-title bulb-description">
+          <title id="bulb-title">
+            A connection inside a glomerulus
+          </title>
 
-        <desc id="bulb-description">
-          A sensory axon ends inside a glomerulus, near the dendritic
-          branches of a bulb neuron. The dendrite connects to that
-          neuron's cell body outside the glomerulus.
-          This schematic shows only selected parts of the circuit.
-        </desc>
+          <desc id="bulb-description">
+            A sensory axon ends inside a glomerulus, near the dendritic
+            branches of a bulb neuron. The dendrite connects to that
+            neuron's cell body outside the glomerulus.
+            This schematic shows only selected parts of the circuit.
+          </desc>
 
-        <circle
-          id="glomerulus-boundary"
-          cx="280"
-          cy="135"
-          r="85" />
-
-        <g id="incoming-sensory-axon">
-          <line
-            id="sensory-input-line"
-            x1="30"
-            y1="135"
-            x2="265"
-            y2="135"
-            pathLength="1" />
           <circle
-            id="sensory-terminal"
-            cx="265"
+            id="glomerulus-boundary"
+            cx="280"
             cy="135"
-            r="6" />
-        </g>
+            r="85" />
 
-        <g id="receiving-bulb-neuron">
-          <g id="receiving-branches">
-            <line x1="285" y1="100" x2="320" y2="135" pathLength="1" />
-            <line x1="285" y1="135" x2="320" y2="135" pathLength="1" />
-            <line x1="285" y1="170" x2="320" y2="135" pathLength="1" />
+          <g id="incoming-sensory-axon">
+            <line
+              id="sensory-input-line"
+              x1="30"
+              y1="135"
+              x2="265"
+              y2="135"
+              pathLength="1" />
+
+            <circle
+              id="sensory-terminal"
+              cx="265"
+              cy="135"
+              r="6" />
           </g>
 
-          <line
-            id="bulb-dendrite"
-            x1="320"
-            y1="135"
-            x2="470"
-            y2="135"
-            pathLength="1" />
+          <g id="receiving-bulb-neuron">
+            <g id="receiving-branches">
+              <line
+                x1="285"
+                y1="100"
+                x2="320"
+                y2="135"
+                pathLength="1" />
 
-          <ellipse cx="495" cy="135" rx="30" ry="40" />
+              <line
+                x1="285"
+                y1="135"
+                x2="320"
+                y2="135"
+                pathLength="1" />
 
-          <line
-            id="bulb-output-axon"
-            x1="525"
-            y1="135"
-            x2="760"
-            y2="135"
-            pathLength="1" />
+              <line
+                x1="285"
+                y1="170"
+                x2="320"
+                y2="135"
+                pathLength="1" />
+            </g>
 
-        </g>
+            <line
+              id="bulb-dendrite"
+              x1="320"
+              y1="135"
+              x2="470"
+              y2="135"
+              pathLength="1" />
 
-        <text x="225" y="35">Glomerulus</text>
-        <text x="25" y="110">Sensory axon</text>
-        <text x="365" y="110">Dendrite</text>
-        <text x="435" y="205">Bulb neuron</text>
-        <text x="600" y="110">Output axon</text>
-        <text x="590" y="175">Toward receiving regions →</text>
-      </svg>
+            <ellipse
+              cx="495"
+              cy="135"
+              rx="30"
+              ry="40" />
 
-      <button id="trace-sensory-input" type="button">
-        Trace the sensory axon
-      </button>
+            <line
+              id="bulb-output-axon"
+              x1="525"
+              y1="135"
+              x2="760"
+              y2="135"
+              pathLength="1" />
+          </g>
+
+          <text x="225" y="35">Glomerulus</text>
+          <text x="25" y="110">Sensory axon</text>
+          <text x="365" y="110">Dendrite</text>
+          <text x="435" y="205">Bulb neuron</text>
+          <text x="600" y="110">Output axon</text>
+          <text x="590" y="175">Toward receiving regions →</text>
+        </svg>
+
+        <button
+          id="trace-sensory-input"
+          class="relay-trace-button"
+          type="button">
+          Trace the sensory axon
+        </button>
+      </div>
 
       <p id="trace-status" aria-live="polite">
         Select the button to trace the pathway between two neurons.
       </p>
 
       <p class="model-note">
-        The dashed circle marks a region containing many connections, not a cell membrane.
-        The enlarged gap indicates a synaptic connection between different neurons. Local circuits and most
+        The dashed circle marks a region containing many connections,
+        not a cell membrane. The enlarged gap indicates a synaptic
+        connection between different neurons. Local circuits and most
         branches are omitted.
       </p>
 
-      <h3>Following a projection</h3>
+      <h3 id="projection-step-title">
+        Following a projection
+      </h3>
 
       <svg
         id="projection-diagram"
@@ -248,18 +290,241 @@
         activity is not represented by this single line.
       </p>
 
+      <h3 id="map-step-title">
+        Where bulb output travels
+      </h3>
+
+      <svg
+        id="brain-projection-map"
+        viewBox="0 0 1230 430"
+        role="img"
+        aria-labelledby="map-title map-description">
+        <title id="map-title">
+          Selected direct and onward olfactory pathways
+        </title>
+
+        <desc id="map-description">
+          Blue routes show selected direct projections from the olfactory
+          bulb to piriform cortex, cortical amygdala, and lateral entorhinal
+          cortex. Copper routes continue from those receiving regions toward
+          orbitofrontal, hypothalamic and autonomic, and hippocampal networks.
+        </desc>
+
+        <defs>
+          <marker
+            id="direct-arrow"
+            markerWidth="10"
+            markerHeight="10"
+            refX="8"
+            refY="5"
+            orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 Z" />
+          </marker>
+
+          <marker
+            id="onward-arrow"
+            markerWidth="10"
+            markerHeight="10"
+            refX="8"
+            refY="5"
+            orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 Z" />
+          </marker>
+
+        </defs>
+
+        <ellipse
+          id="map-bulb"
+          cx="105"
+          cy="215"
+          rx="75"
+          ry="90" />
+
+        <g id="direct-routes">
+          <path
+            id="route-piriform"
+            class="direct-route"
+            d="M 180 195 C 300 90, 400 90, 515 90" />
+
+          <path
+            id="route-amygdala"
+            class="direct-route"
+            d="M 180 215 C 310 215, 400 215, 515 215" />
+
+          <path
+            id="route-entorhinal"
+            class="direct-route"
+            d="M 180 235 C 300 340, 400 340, 515 340" />
+        </g>
+
+        <g id="onward-routes">
+          <path
+            id="route-orbitofrontal"
+            class="onward-route"
+            d="M 800 90 C 850 90, 880 90, 930 90" />
+
+          <path
+            id="route-hypothalamic"
+            class="onward-route"
+            d="M 800 215 C 850 215, 880 215, 930 215" />
+
+          <path
+            id="route-hippocampal"
+            class="onward-route"
+            d="M 800 340 C 850 340, 880 340, 930 340" />
+        </g>
+
+        <g id="piriform-node" class="map-node">
+          <rect x="515" y="50" width="285" height="80" rx="18" />
+          <text x="657" y="98" text-anchor="middle">
+            Piriform cortex
+          </text>
+        </g>
+
+        <g id="amygdala-node" class="map-node">
+          <rect x="515" y="175" width="285" height="80" rx="18" />
+          <text x="657" y="208" text-anchor="middle">
+            <tspan x="657">Cortical amygdala</tspan>
+            <tspan x="657" dy="24">selected areas</tspan>
+          </text>
+        </g>
+
+        <g id="entorhinal-node" class="map-node">
+          <rect x="515" y="300" width="285" height="80" rx="18" />
+          <text x="657" y="348" text-anchor="middle">
+            Lateral entorhinal cortex
+          </text>
+        </g>
+
+        <g id="orbitofrontal-node" class="map-node onward-node">
+          <rect x="930" y="50" width="270" height="80" rx="18" />
+          <text x="1065" y="98" text-anchor="middle">
+            Orbitofrontal cortex
+          </text>
+        </g>
+
+        <g id="hypothalamic-node" class="map-node onward-node">
+          <rect x="930" y="175" width="270" height="80" rx="18" />
+          <text x="1065" y="208" text-anchor="middle">
+            <tspan x="1065">Hypothalamic +</tspan>
+            <tspan x="1065" dy="24">autonomic networks</tspan>
+          </text>
+        </g>
+
+        <g id="hippocampal-node" class="map-node onward-node">
+          <rect x="930" y="300" width="270" height="80" rx="18" />
+          <text x="1065" y="348" text-anchor="middle">
+            Hippocampal networks
+          </text>
+        </g>
+
+        <text
+          id="map-bulb-label"
+          x="105"
+          y="220"
+          text-anchor="middle">
+          <tspan x="105">Olfactory</tspan>
+          <tspan x="105" dy="24">bulb</tspan>
+        </text>
+      </svg>
+
+      <div id="region-controls" aria-label="Explore mapped brain regions">
+        <button
+          class="region-button"
+          type="button"
+          data-region="piriform"
+          aria-pressed="false">
+          Piriform
+        </button>
+
+        <button
+          class="region-button"
+          type="button"
+          data-region="amygdala"
+          aria-pressed="false">
+          Cortical amygdala
+        </button>
+
+        <button
+          class="region-button"
+          type="button"
+          data-region="entorhinal"
+          aria-pressed="false">
+          Entorhinal
+        </button>
+
+        <button
+          class="region-button"
+          type="button"
+          data-region="orbitofrontal"
+          aria-pressed="false">
+          Orbitofrontal
+        </button>
+
+        <button
+          class="region-button"
+          type="button"
+          data-region="hypothalamic"
+          aria-pressed="false">
+          Hypothalamic / autonomic
+        </button>
+
+        <button
+          class="region-button"
+          type="button"
+          data-region="hippocampal"
+          aria-pressed="false">
+          Hippocampal
+        </button>
+      </div>
+
+      <div id="region-detail" aria-live="polite">
+        <p id="region-detail-title">
+          Choose a destination to inspect its route.
+        </p>
+        <p id="region-detail-connection"></p>
+        <p id="region-detail-description"></p>
+      </div>
+
+      <p class="model-note">
+        Blue routes represent selected direct projections from bulb neurons.
+        Copper routes represent selected onward connections beginning in
+        regions that have already received olfactory input. These pathways
+        are simplified: additional routes, intermediate regions, feedback
+        connections, and direct bulb targets are omitted.
+      </p>
+
     </section>
 
-    <section id="explorer" aria-label="Pattern explorer">
-      <p><label for="pattern-select">Choose a starting pattern:</label>
+    <section id="explorer" aria-labelledby="explorer-title" hidden>
+      <h2 id="explorer-title">
+        Zoom in: What information reaches piriform cortex?
+      </h2>
 
-        <select id="pattern-select">
-          <option value="A">Pattern A</option>
-          <option value="B">Pattern B</option>
-          <option value="C">Pattern C</option>
-        </select>
+      <p>
+        Bulb output reaching piriform cortex is distributed across many
+        neurons and changes over time. This teaching model compresses that
+        activity into eight simplified output groups so we can ask what
+        happens when part of a pattern becomes unavailable.
+      </p>
 
-      <p id="pattern-status">Selected pattern: A</p>
+      <p class="model-note">
+        Each value summarizes whether one modeled bulb-output group crosses
+        an activity threshold during an observation window. A 1 means above
+        threshold, a 0 means below threshold, and a ? means the model cannot
+        observe that group. These are invented patterns, not measurements
+        of real odors or individual neurons.
+      </p>
+      <label for="pattern-select">
+        Choose a bulb-output pattern:
+      </label>
+      <select id="pattern-select">
+        <option value="A">Pattern A</option>
+        <option value="B">Pattern B</option>
+        <option value="C">Pattern C</option>
+      </select>
+
+      <p id="pattern-status">Selected input: Pattern A</p>
       <div id="channels" aria-label="Input channels"></div>
       </p>
 

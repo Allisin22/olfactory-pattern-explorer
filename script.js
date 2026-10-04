@@ -1,3 +1,15 @@
+/*
+  OLFACTORY EXPLORER CONTROL FLOW
+
+  1. Pattern explorer stores and compares simplified bulb-output patterns.
+  2. Sensory-neuron controls highlight receptors or the axon.
+  3. Glomerulus trace reveals the pathway between two neurons.
+  4. Projection trace follows a bulb neuron's axon into piriform cortex.
+  5. Projection-map controls highlight routes and explain destinations.
+*/
+
+
+// --------- 1. Pattern explorer ---------
 const patterns = {
   A: [1, 1, 0, 0, 1, 0, 1, 0],
   B: [1, 1, 0, 0, 0, 1, 1, 0],
@@ -14,7 +26,8 @@ const patternStatus = document.getElementById("pattern-status");
 
 patternSelect.addEventListener("change", function () {
   selectedPattern = patternSelect.value;
-  patternStatus.textContent = "Selected pattern: " + selectedPattern;
+  patternStatus.textContent =
+    "Selected input: Pattern " + selectedPattern;
 
 });
 
@@ -34,17 +47,21 @@ function renderChannels() {
 
     if (isAvailable) {
       channel.dataset.value = value;
-      channel.textContent = "Channel " + (index + 1) + ": " + value;
+      channel.textContent =
+        "Output group " + (index + 1) + ": " + value;
       channel.setAttribute(
         "aria-label",
-        "Channel " + (index + 1) + ": " + value + ". Click to hide."
+        "Output group " + (index + 1) + ": " + value +
+        ". Click to make this input unavailable."
       );
     } else {
       channel.dataset.value = "hidden";
-      channel.textContent = "Channel " + (index + 1) + ": ?";
+      channel.textContent =
+        "Output group " + (index + 1) + ": ?";
       channel.setAttribute(
         "aria-label",
-        "Channel " + (index + 1) + ": unavailable. Click to restore."
+        "Output group " + (index + 1) +
+        ": unavailable. Click to restore."
       );
     }
 
@@ -109,11 +126,15 @@ restoreButton.addEventListener("click", function () {
   renderChannels();
 });
 
+
+// ---------- 2. Sensory-neuron structure selection ----------
 const highlightAxonButton = document.getElementById("highlight-axon");
 const receptorButton = document.getElementById("explore-receptors");
 const sensoryAxon = document.getElementById("sensory-axon");
 const receptorMarkers = document.getElementById("receptor-markers");
 const sceneExplanation = document.getElementById("scene-explanation");
+const defaultSceneExplanation =
+  sceneExplanation.textContent.trim();
 
 function clearHighlights() {
   sensoryAxon.classList.remove("is-highlighted");
@@ -121,32 +142,45 @@ function clearHighlights() {
 
   highlightAxonButton.setAttribute("aria-pressed", "false");
   receptorButton.setAttribute("aria-pressed", "false");
+
+  sceneExplanation.textContent = defaultSceneExplanation;
 }
 
 receptorButton.addEventListener("click", function () {
+  const wasActive =
+    receptorButton.getAttribute("aria-pressed") === "true";
+
   clearHighlights();
 
-  receptorMarkers.classList.add("is-highlighted");
-  receptorButton.setAttribute("aria-pressed", "true");
+  if (!wasActive) {
+    receptorMarkers.classList.add("is-highlighted");
+    receptorButton.setAttribute("aria-pressed", "true");
 
-  sceneExplanation.textContent =
-    "These markers represent receptor proteins in the membranes of " +
-    "the cilia. Odor molecules interact with receptors here, initiating " +
-    "processes inside the sensory neuron that can lead to action potentials.";
+    sceneExplanation.textContent =
+      "These markers represent receptor proteins in the membranes of " +
+      "the cilia. Odor molecules interact with receptors here, initiating " +
+      "processes inside the sensory neuron that can lead to action potentials.";
+  }
 });
 
 highlightAxonButton.addEventListener("click", function () {
+  const wasActive =
+    highlightAxonButton.getAttribute("aria-pressed") === "true";
+
   clearHighlights();
 
-  sensoryAxon.classList.add("is-highlighted");
-  highlightAxonButton.setAttribute("aria-pressed", "true");
+  if (!wasActive) {
+    sensoryAxon.classList.add("is-highlighted");
+    highlightAxonButton.setAttribute("aria-pressed", "true");
 
-  sceneExplanation.textContent =
-    "The highlighted axon is part of this sensory neuron. " +
-    "Action potentials travel along it toward the olfactory bulb; " +
-    "the odor molecule itself does not travel down the axon.";
+    sceneExplanation.textContent =
+      "The highlighted axon is part of this sensory neuron. " +
+      "Action potentials travel along it toward the olfactory bulb; " +
+      "the odor molecule itself does not travel down the axon.";
+  }
 });
 
+// ---------- 3. Glomerulus pathway animation ----------
 const traceInputButton = document.getElementById("trace-sensory-input");
 const sensoryInputLine = document.getElementById("sensory-input-line");
 const sensoryTerminal = document.getElementById("sensory-terminal");
@@ -160,7 +194,7 @@ const bulbOutputAxon = document.getElementById("bulb-output-axon");
 traceInputButton.addEventListener("click", async function () {
   traceInputButton.disabled = true;
   traceStatus.textContent =
-    "The sensory neurn's axon is entering the glomerular circuit.";
+    "The sensory neuron's axon is entering the glomerular circuit.";
 
   sensoryInputLine.style.strokeDashoffset = "1";
   sensoryTerminal.style.opacity = "0";
@@ -168,15 +202,17 @@ traceInputButton.addEventListener("click", async function () {
 
   receivingBranches.forEach(function (branch) {
     branch.style.strokeDashoffset = "1";
-    bulbOutputAxon.style.strokeDashoffset = "1";
   });
+
+  bulbOutputAxon.style.strokeDashoffset = "1";
 
   const reduceMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  const duration = reduceMotion ? 0 : 900;
-  const pause = reduceMotion ? 0 : 400;
+  const duration = reduceMotion ? 0 : 2000;
+  const pause = reduceMotion ? 0 : 1000;
+  const outputDuration = reduceMotion ? 0 : 2700;
 
   const sensoryDrawing = sensoryInputLine.animate(
     [
@@ -250,7 +286,7 @@ traceInputButton.addEventListener("click", async function () {
       { strokeDashoffset: 0 }
     ],
     {
-      duration: 1200,
+      duration: outputDuration,
       easing: "linear",
       fill: "forwards"
     }
@@ -264,6 +300,7 @@ traceInputButton.addEventListener("click", async function () {
   traceInputButton.disabled = false;
 });
 
+// ---------- 4. Bulb-to-piriform projection animation ----------
 const followProjectionButton = document.getElementById(
   "follow-projection"
 );
@@ -275,6 +312,7 @@ const projectionStatus = document.getElementById("projection-status");
 
 followProjectionButton.addEventListener("click", async function () {
   followProjectionButton.disabled = true;
+  followProjectionButton.classList.add("is-animating");
 
   directProjection.style.strokeDashoffset = "1";
   projectionTerminals.style.opacity = "0";
@@ -307,5 +345,128 @@ followProjectionButton.addEventListener("click", async function () {
     "The bulb neuron's axon enters piriform cortex and forms " +
     "connections there. This is a direct bulb projection.";
 
+  followProjectionButton.classList.remove("is-animating");
   followProjectionButton.disabled = false;
+});
+
+// ---------- 5. Projection-map region selection ----------
+const regionDetails = {
+  piriform: {
+    nodeId: "piriform-node",
+    routeIds: ["route-piriform"],
+    title: "Piriform cortex",
+    connection: "Direct bulb projection.",
+    description:
+      "Piriform cortex combines distributed bulb inputs into learned " +
+      "odor representations involved in identity and association."
+  },
+
+  amygdala: {
+    nodeId: "amygdala-node",
+    routeIds: ["route-amygdala"],
+    title: "Cortical amygdala",
+    connection: "Selected areas receive direct bulb projections.",
+    description:
+      "These circuits contribute to the learned emotional importance " +
+      "and behavioral value of odor information."
+  },
+
+  entorhinal: {
+    nodeId: "entorhinal-node",
+    routeIds: ["route-entorhinal"],
+    title: "Lateral entorhinal cortex",
+    connection: "Direct bulb projection.",
+    description:
+      "This region links olfactory information with broader contextual " +
+      "and memory-related networks."
+  },
+
+  orbitofrontal: {
+    nodeId: "orbitofrontal-node",
+    routeIds: ["route-piriform", "route-orbitofrontal"],
+    title: "Orbitofrontal cortex",
+    connection:
+      "Onward from piriform cortex in this selected route; indirect from the bulb.",
+    description:
+      "Orbitofrontal cortex contributes to conscious evaluation, " +
+      "pleasantness, reward value, and integration with other senses. " +
+      "Additional olfactory routes, including thalamic circuitry, also exist."
+  },
+
+  hypothalamic: {
+    nodeId: "hypothalamic-node",
+    routeIds: ["route-amygdala", "route-hypothalamic"],
+    title: "Hypothalamic and autonomic networks",
+    connection:
+      "Onward from cortical amygdala in this selected route; indirect from the bulb.",
+    description:
+      "These broader circuits can connect odor information with feeding, " +
+      "arousal, hormonal regulation, and autonomic responses. Other routes " +
+      "from olfactory areas are omitted here."
+  },
+
+  hippocampal: {
+    nodeId: "hippocampal-node",
+    routeIds: ["route-entorhinal", "route-hippocampal"],
+    title: "Hippocampal networks",
+    connection:
+      "Onward through lateral entorhinal cortex; indirect from the bulb.",
+    description:
+      "These networks contribute to contextual and memory-related processing " +
+      "associated with odors and the circumstances in which they occur."
+  }
+};
+
+const regionButtons = document.querySelectorAll(".region-button");
+const mapNodes = document.querySelectorAll(".map-node");
+const mapRoutes = document.querySelectorAll(
+  ".direct-route, .onward-route"
+);
+
+const regionDetailTitle = document.getElementById(
+  "region-detail-title"
+);
+const regionDetailConnection = document.getElementById(
+  "region-detail-connection"
+);
+const regionDetailDescription = document.getElementById(
+  "region-detail-description"
+);
+
+regionButtons.forEach(function (button) {
+  button.addEventListener("click", function () {
+    const regionName = button.dataset.region;
+    const region = regionDetails[regionName];
+
+    regionButtons.forEach(function (otherButton) {
+      const isSelected = otherButton === button;
+
+      otherButton.setAttribute(
+        "aria-pressed",
+        String(isSelected)
+      );
+    });
+
+    mapNodes.forEach(function (node) {
+      node.classList.remove("is-selected");
+    });
+
+    mapRoutes.forEach(function (route) {
+      route.classList.remove("is-selected");
+    });
+
+    document
+      .getElementById(region.nodeId)
+      .classList.add("is-selected");
+
+    region.routeIds.forEach(function (routeId) {
+      document
+        .getElementById(routeId)
+        .classList.add("is-selected");
+    });
+
+    regionDetailTitle.textContent = region.title;
+    regionDetailConnection.textContent = region.connection;
+    regionDetailDescription.textContent = region.description;
+  });
 });
