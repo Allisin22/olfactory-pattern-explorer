@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width" , initial-scale="1.0">
+  <title>Hopfield Pattern Recovery</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <h1>Hopfield Pattern Recovery</h1>
+
+  <div class="pattern-section">
+
+    <div class="pattern-block">
+
+      <div id="stored-pattern"></div>
+
+      <div class="pattern-description">
+        <h3>Stored pattern</h3>
+        <p>
+          The reference pattern already encoded in the network's
+          connection weights.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="pattern-block">
+
+      <div id="degraded-pattern"></div>
+
+      <div class="pattern-description">
+        <h3>Degraded input</h3>
+        <p>
+          A damaged version of the stored pattern. Some unit states
+          have been flipped.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="pattern-block">
+
+      <div id="updated-pattern"></div>
+
+      <div class="pattern-description">
+        <h3>Recovered pattern</h3>
+        <p>
+          The network's final state after recurrent updates.
+          This stays empty until recovery runs.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="recovery-explainer">
+    <h3>What does Run recovery do?</h3>
+    <p>
+      Run recovery repeatedly applies the update rule to the degraded pattern. The network stops when two consecutive
+      states
+      are the same, or after 20 updates.
+    </p>
+  </div>
+
+  <div class="recovery-controls">
+    <button id="run-recovery" type="button">
+      Run recovery
+    </button>
+
+    <button id="reset-recovery" type="button">
+      Reset
+    </button>
+
+    <p id="recovery-result"></p>
+  </div>
+
+  <div id="run-math" class="run-math"></div>
+
+  <div class="math-pathway">
+
+    <div class="math-step">
+      <span class="math-label">Store the pattern</span>
+      <div class="equation">
+        w<sub>ij</sub> =
+        <span class="fraction">
+          <span>1</span>
+          <span>N</span>
+        </span>
+        ξ<sub>i</sub>ξ<sub>j</sub>
+      </div>
+      <p>Relationships between stored unit states become connection weights.</p>
+    </div>
+
+    <div class="math-arrow">→</div>
+
+    <div class="math-step">
+      <span class="math-label">Use the damaged input</span>
+      <div class="equation">
+        h<sub>i</sub> =
+        Σ<sub>j</sub>
+        w<sub>ij</sub>s<sub>j</sub>
+      </div>
+      <p>Each unit combines activity from the others, scaled by their weights.</p>
+    </div>
+
+    <div class="math-arrow">→</div>
+
+    <div class="math-step">
+      <span class="math-label">Update the state</span>
+
+      <div class="equation">
+        s<sub>i</sub>(t+1) =
+        f(h<sub>i</sub>(t) - θ<sub>i</sub>)
+      </div>
+
+      <p>
+        The weighted input is compared with a threshold to determine the unit's next state.
+      </p>
+
+      <p class="math-note">
+        In this demo: θ<sub>i</sub> = 0, and f is the sign rule:
+        positive input gives +1; negative input gives −1.
+      </p>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>

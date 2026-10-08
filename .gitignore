@@ -1,0 +1,6 @@
+.DS_store
+.env
+node_modules/
+__pycache__/
+*.log
+practice.js
