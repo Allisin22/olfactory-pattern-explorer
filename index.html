@@ -546,40 +546,68 @@
 
     </section>
   </main>
+
+  <script>
+    (() => {
+      const parentOrigin = "https://aliceisin.com";
+      let lastHeight = 0;
+
+      function reportHeight(force = false) {
+        const body = document.body;
+
+        const height = Math.ceil(Math.max(
+          body.scrollHeight,
+          body.getBoundingClientRect().height
+        )) + 12;
+
+        if (!force && Math.abs(height - lastHeight) < 2) {
+          return;
+        }
+
+        lastHeight = height;
+
+        window.parent.postMessage({
+          type: "alice-embed-height",
+          height: height
+        }, parentOrigin);
+      }
+
+      // WordPress can request the height again.
+      window.addEventListener("message", (event) => {
+        if (
+          event.origin !== parentOrigin ||
+          event.source !== window.parent ||
+          event.data?.type !== "alice-request-height"
+        ) {
+          return;
+        }
+
+        reportHeight(true);
+      });
+
+      const observer = new ResizeObserver(() => {
+        reportHeight();
+      });
+
+      observer.observe(document.body);
+
+      window.addEventListener("load", () => {
+        reportHeight(true);
+      });
+
+      window.addEventListener("resize", () => {
+        reportHeight(true);
+      });
+
+      if (document.fonts) {
+        document.fonts.ready.then(() => reportHeight(true));
+      }
+
+      reportHeight(true);
+    })();
+  </script>
+
 </body>
-
-<script>
-  (() => {
-    let lastHeight = 0;
-
-    function reportHeight() {
-      const height = Math.ceil(
-        document.body.getBoundingClientRect().height
-      );
-
-      if (Math.abs(height - lastHeight) < 2) return;
-
-      lastHeight = height;
-
-      window.parent.postMessage({
-        type: "alice-embed-height",
-        height: height
-      }, "https://aliceisin.com");
-    }
-
-    const observer = new ResizeObserver(reportHeight);
-    observer.observe(document.body);
-
-    window.addEventListener("load", reportHeight);
-    window.addEventListener("resize", reportHeight);
-
-    if (document.fonts) {
-      document.fonts.ready.then(reportHeight);
-    }
-
-    reportHeight();
-  })();
-</script>
 
 
 </html>

@@ -325,3 +325,12 @@ h1 {
     transform: rotate(90deg);
   }
 }
+
+/* Center equations within mobile math cards */
+@media (max-width: 840px) {
+  .math-step .equation {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto 1rem;
+  }
+}
