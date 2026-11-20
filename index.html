@@ -548,4 +548,38 @@
   </main>
 </body>
 
+<script>
+  (() => {
+    let lastHeight = 0;
+
+    function reportHeight() {
+      const height = Math.ceil(
+        document.body.getBoundingClientRect().height
+      );
+
+      if (Math.abs(height - lastHeight) < 2) return;
+
+      lastHeight = height;
+
+      window.parent.postMessage({
+        type: "alice-embed-height",
+        height: height
+      }, "https://aliceisin.com");
+    }
+
+    const observer = new ResizeObserver(reportHeight);
+    observer.observe(document.body);
+
+    window.addEventListener("load", reportHeight);
+    window.addEventListener("resize", reportHeight);
+
+    if (document.fonts) {
+      document.fonts.ready.then(reportHeight);
+    }
+
+    reportHeight();
+  })();
+</script>
+
+
 </html>

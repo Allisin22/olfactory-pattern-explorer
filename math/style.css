@@ -295,3 +295,33 @@ h1 {
 .pattern-block .pattern-description h3 {
   text-align: center;
 }
+
+/* Responsive Hopfield pattern override, stacks patterns when necessary */
+.pattern-section {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+  width: 100%;
+  justify-items: center;
+}
+
+.pattern-block {
+  width: 100%;
+  max-width: 260px;
+  min-width: 0;
+}
+
+@media (max-width: 840px) {
+  .pattern-section {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .math-pathway {
+    grid-template-columns: 1fr;
+  }
+
+  .math-arrow {
+    text-align: center;
+    transform: rotate(90deg);
+  }
+}
